@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List   ;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.calvin.spring_rest_api.modal.User;;
+import com.calvin.spring_rest_api.model.User;;
 
 @RestController
 @RequestMapping("/api/users")
@@ -37,5 +34,18 @@ public class UserController {
             .map(user -> ResponseEntity.ok(user))
             .orElse(ResponseEntity.notFound().build());
     }
-	
+
+    // Add user
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        users.add(user);
+        return user;
+    }
+
+    // Delete user
+    @DeleteMapping("/{id}")
+	public String deleteUser(@PathVariable Long id) {
+        users.removeIf(user -> user.getId().equals(id));
+        return "User with id " + id + " is deleted.";
+    }
 }

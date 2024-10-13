@@ -1,4 +1,4 @@
-package com.calvin.spring_rest_api.modal;
+package com.calvin.spring_rest_api.model;
 
 public class User {
 	private Long id;
